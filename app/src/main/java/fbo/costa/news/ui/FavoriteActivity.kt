@@ -1,12 +1,18 @@
 package fbo.costa.news.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import fbo.costa.news.R
+import androidx.viewbinding.ViewBinding
+import fbo.costa.news.databinding.ActivitySearchBinding
 
-class FavoriteActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorite)
+class FavoriteActivity : AbstractActivity() {
+
+    private lateinit var binding: ActivitySearchBinding
+
+    override fun getLayout(): ViewBinding {
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        return binding
+    }
+
+    override fun onInject() {
+
     }
 }

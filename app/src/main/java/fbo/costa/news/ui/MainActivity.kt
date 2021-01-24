@@ -34,7 +34,7 @@ class MainActivity : AbstractActivity(), ViewHome.View {
     }
 
     override fun onInject() {
-        val dataSource = DataSource()
+        val dataSource = DataSource(this)
         presenter = MainPresenter(this, dataSource)
         presenter.onRequestList()
         initToolbar()

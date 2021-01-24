@@ -4,14 +4,20 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
+import fbo.costa.news.R
 import fbo.costa.news.data.model.Article
 import fbo.costa.news.databinding.ActivityDetailsBinding
+import fbo.costa.news.presenter.ViewHome
+import fbo.costa.news.presenter.favorite.FavoritePresenter
+import fbo.costa.news.repository.DataSource
 import fbo.costa.news.util.Constants
 
-class DetailsActivity : AbstractActivity() {
+class DetailsActivity : AbstractActivity(), ViewHome.Favorite {
 
     private lateinit var binding: ActivityDetailsBinding
     private lateinit var article: Article
+    private lateinit var presenter: FavoritePresenter
 
     override fun getLayout(): ViewBinding {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
@@ -20,14 +26,27 @@ class DetailsActivity : AbstractActivity() {
 
     override fun onInject() {
         getArticle()
+        val dataSource = DataSource(this)
+        presenter = FavoritePresenter(this, dataSource)
 
         binding.apply {
             iniWebViewClient()
 
-            article.url?.let { url ->
-                webView.loadUrl(url)
+            article.url?.let { _url ->
+                webView.loadUrl(_url)
+            }
+
+            fab.setOnClickListener { _view ->
+                presenter.insertModel(article)
+                Snackbar.make(
+                    _view, getString(R.string.text_item_saved),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
+    }
+
+    override fun showList(articleList: List<Article>) {
     }
 
     private fun getArticle() {

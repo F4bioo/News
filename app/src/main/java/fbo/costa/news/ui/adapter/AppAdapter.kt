@@ -86,4 +86,18 @@ class AppAdapter(
         articleList.clear()
         articleList.addAll(differ.currentList)
     }
+
+    fun getItem(position: Int): Article {
+        return articleList[position]
+    }
+
+    fun insertItem(position: Int, article: Article) {
+        articleList.add(position, article)
+        notifyItemInserted(position)
+    }
+
+    fun deleteItem(position: Int) {
+        articleList.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }

@@ -35,7 +35,7 @@ class SearchActivity : AbstractActivity(), ViewHome.View {
     }
 
     override fun onInject() {
-        val dataSource = DataSource()
+        val dataSource = DataSource(this)
         presenter = SearchPresenter(this, dataSource)
         initToolbar()
         iniRecycler()

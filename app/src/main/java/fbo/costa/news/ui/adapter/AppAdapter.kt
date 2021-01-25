@@ -9,7 +9,10 @@ import com.squareup.picasso.Picasso
 import fbo.costa.news.R
 import fbo.costa.news.data.model.Article
 import fbo.costa.news.databinding.AdapterItemBinding
+import fbo.costa.news.util.Constants
 import fbo.costa.news.util.DiffCallBack
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AppAdapter(
     private val onClickListener: (article: Article) -> Unit
@@ -61,7 +64,9 @@ class AppAdapter(
                 textTitle.text = article.author ?: article.source?.name
                 textSource.text = article.source?.name ?: article.author
                 textDescription.text = article.description
-                textPublishedAt.text = article.publishedAt
+                textPublishedAt.text = article.publishedAt?.let { _publishedAt ->
+                    datetimeFormat(_publishedAt)
+                }
 
                 root.setOnClickListener {
                     onClickListener(article)
@@ -99,5 +104,17 @@ class AppAdapter(
     fun deleteItem(position: Int) {
         articleList.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    // ApiNews provides this type: 2021-01-25T10:55:15Z
+    // Fun returns this type: Mon, 25 Jan 10:55
+    private fun datetimeFormat(publishedAt: String): String {
+        val apiDatetime = SimpleDateFormat(Constants.API_DATETIME_FORMAT, Locale.getDefault())
+        val pattern = SimpleDateFormat(Constants.PATTERN, Locale.getDefault())
+
+        apiDatetime.parse(publishedAt)?.let { _date ->
+            return pattern.format(_date)
+        }
+        return publishedAt
     }
 }

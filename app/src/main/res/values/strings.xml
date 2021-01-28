@@ -7,4 +7,5 @@
     <string name="text_item_saved">Article saved.</string>
     <string name="text_item_deleted">Item deleted</string>
     <string name="text_undo">Undo</string>
+    <string name="text_no_internet_connection">No internet connection!</string>
 </resources>

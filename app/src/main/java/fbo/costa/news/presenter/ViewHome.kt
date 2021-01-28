@@ -5,6 +5,7 @@ import fbo.costa.news.data.model.Article
 interface ViewHome {
 
     interface View {
+
         fun showProgress()
 
         fun showFailure(message: String)
@@ -12,9 +13,12 @@ interface ViewHome {
         fun hideProgress()
 
         fun showList(articleList: List<Article>)
+
     }
 
-    interface Favorite{
+    interface Favorite {
+
         fun showList(articleList: List<Article>)
+
     }
 }

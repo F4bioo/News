@@ -1,10 +1,10 @@
 package fbo.costa.news.presenter.search
 
-import fbo.costa.news.repository.DataSource
 import fbo.costa.news.data.api.DataResponse
 import fbo.costa.news.data.model.Article
 import fbo.costa.news.data.model.ArticleApiEntity
 import fbo.costa.news.presenter.ViewHome
+import fbo.costa.news.repository.DataSource
 
 class SearchPresenter(
     private val view: ViewHome.View,

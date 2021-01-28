@@ -73,7 +73,7 @@ class SearchActivity : AbstractActivity(), ViewHome.View {
                 _newText?.let { _query ->
                     if (_query.isNotEmpty()) {
                         presenter.onSearch(_query)
-                        binding.progressSearch.visibility = View.VISIBLE
+                        showProgress()
                     }
                 }
             }

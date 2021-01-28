@@ -2,6 +2,7 @@ package fbo.costa.news.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -55,12 +56,7 @@ class AppAdapter(
 
         fun viewBind(article: Article) {
             biding.apply {
-                Picasso.get()
-                    .load(article.urlToImage)
-                    .placeholder(R.drawable.ic_image_placeholder_200dp)
-                    .error(R.drawable.ic_image_error_200dp)
-                    .into(imageNews)
-
+                imageNews.loadImage(article.urlToImage)
                 textTitle.text = article.author ?: article.source?.name
                 textSource.text = article.source?.name ?: article.author
                 textDescription.text = article.description
@@ -68,7 +64,7 @@ class AppAdapter(
                     datetimeFormat(_publishedAt)
                 }
 
-                root.setOnClickListener {
+                itemView.setOnClickListener {
                     onClickListener(article)
                 }
             }
@@ -104,6 +100,14 @@ class AppAdapter(
     fun deleteItem(position: Int) {
         articleList.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    private fun ImageView.loadImage(url: String?) {
+        Picasso.get()
+            .load(url)
+            .placeholder(R.drawable.ic_image_placeholder_200dp)
+            .error(R.drawable.ic_image_error_200dp)
+            .into(this)
     }
 
     // ApiNews provides this type: 2021-01-25T10:55:15Z

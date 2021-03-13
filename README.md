@@ -7,5 +7,5 @@
   - API Rest com Retrofit.
   - api https://newsapi.org/
 
-<img src="https://github.com/F4bioo/News/blob/master/screen_capture.png" width="30%"></img>
-<img src="https://github.com/F4bioo/News/blob/master/screen_capture2.png" width="30%"></img>
+<img src="screen_capture.png" width="30%"></img>
+<img src="screen_capture2.png" width="30%"></img>
